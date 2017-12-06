@@ -2,12 +2,14 @@ import numpy as np
 
 # y = m*x + c
 
-y = (85, 70, 78, 94)
+y = np.array([[85], [70], [78], [94]])
 
-x = ((8,5),(5,7),(6,4),(8,8)) #(sleep,study)
+x = np.array([(8,5),(5,7),(6,4),(8,8)]) #(sleep,study)
 
 #simple forward propogation 
+print x
 
+#Sigmoid function to calculate activation values at inner node
 def sigmoid(t):
 		return (1 / (1 + np.exp(t)))
 
@@ -34,9 +36,13 @@ class Neural_Net(object):
 
 		self.y_hat = 100 * self.a_three
 
+
+
 		return self.y_hat
 
-	#Sigmoid function to calculate activation values at inner node
+	def errorEstimate(self):
+		self.error = np.subtract(self.y,self.y_hat)
+		print(self.error)
 	
 
 rand = Neural_Net(x,y)
@@ -44,3 +50,5 @@ rand = Neural_Net(x,y)
 y_hat = rand.simplePred()
 
 print(y_hat)
+
+rand.errorEstimate()
