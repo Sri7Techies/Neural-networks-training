@@ -1,8 +1,13 @@
 import numpy as np 
 
-# y = m*x + c
+'''
+	A simple neural network demonstration using python
+	This neural network has one hidden layer with 3 nodes in it
+	This demonstration is about simple forward propogation 
+'''
 
-y = np.array([[85], [70], [78], [94]])
+#y is the marks scored and x is (sleep, study) hours
+y = np.array([[85], [70], [78], [94]])  #to make it 1 x 4 
 
 x = np.array([(8,5),(5,7),(6,4),(8,8)]) #(sleep,study)
 
@@ -11,7 +16,7 @@ print x
 
 #Sigmoid function to calculate activation values at inner node
 def sigmoid(t):
-		return (1 / (1 + np.exp(t)))
+	return (1 / (1 + np.exp(t)))
 
 class Neural_Net(object):
 
@@ -49,6 +54,8 @@ rand = Neural_Net(x,y)
 
 y_hat = rand.simplePred()
 
+print("The predicted values of marks using simple forward propogation NN are: ")
 print(y_hat)
 
+print("\nThis is rougly the error :")
 rand.errorEstimate()
