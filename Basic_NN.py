@@ -7,9 +7,9 @@ import numpy as np
 '''
 
 #y is the marks scored and x is (sleep, study) hours
-y = np.array([[85], [70], [78], [94]])  #to make it 1 x 4 
+y = np.array([[85], [70], [78], [94]])  #to make it 4 x 1 colomn vector 
 
-x = np.array([(8,5),(5,7),(6,4),(8,8)]) #(sleep,study)
+x = np.array([[(8,5)],[(5,7)],[(6,4)],[(8,8)]]) #(sleep,study) a 4 x 2 matrix
 
 #simple forward propogation 
 print x
