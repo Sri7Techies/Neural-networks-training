@@ -55,7 +55,7 @@ class Neural_Net(object):
 		self.W_one = 2 * np.random.rand(self.innerlayer, self.hiddenlayer) - 1
 		self.W_two = 2 * np.random.rand(self.hiddenlayer, self.outerlayer) - 1
 
-	def  backProp(self):
+	def  forwardProp(self):
 
 		
 
@@ -64,24 +64,11 @@ class Neural_Net(object):
 		self.z_three = np.dot(self.a_two, self.W_two)
 		self.a_three = sigmoid(self.z_three)
 
-'''
-		self.delta_three = np.multiply((self.a_three - self.y), sigmoid_prime(self.z_three)) 
-
-		self.pot = np.multiply(self.delta_three, sigmoid_prime(self.z_two))
-		self.delta_two =  np.dot(self.W_two.T, self.pot)
-
-		self.dEdW_one = np.dot(self.delta_two, self.x.T)
-		self.dEdW_two = np.dot(self.delta_three, self.a_two.T)
-
-		self.W_one = self.W_one - (self.lr * self.dEdW_one)
-		self.W_two = self.W_two - (self.lr * self.dEdW_two)
-'''
-
 		return self.a_three
 
 NN = Neural_Net(x_minmax_scaled, y_minmax_scaled, 0.1)
 
-y_hat = NN.backProp()
+y_hat = NN.forwardProp()
 
 print(100 * y_hat)
 
