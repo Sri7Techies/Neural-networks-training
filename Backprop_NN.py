@@ -4,10 +4,10 @@ import pandas as pd
 from sklearn import preprocessing
 
 """
-	Project demonstrating simple backpropogation
-	in Neural networks.
-	Data used is the marks of three exams
-	which are used to predict final score
+Project demonstrating simple backpropogation
+in Neural networks.
+Data used is the marks of three exams
+which are used to predict final score
 
 """
 
@@ -25,59 +25,49 @@ y_scaled = preprocessing.scale(final_score)
 x_minmax_scaled = min_max_scaler.fit_transform(x_scaled)
 y_minmax_scaled = min_max_scaler.fit_transform(y_scaled)
 
-
-
-
-#helper functions
-
-#sigmoid
-def sigmoid(i):
-	return (1 / (1 + np.exp(-i)))
-
-#derivative of signoid ==> g' = g * (1 - g) where g is sigmoid
-def sigmoid_prime(i):
-	return (sigmoid(i)) * (1 - sigmoid(-i))
-
-#actual neural network
-
 class Neural_Net(object):
-
-	def __init__(self, x, y, lr):
-
-		random.seed(1)
-
-		self.x = x
-		self.y = y
-		self.lr = lr #learning rate
-		self.innerlayer = 3 #input layer
-		self.hiddenlayer = 10
-		self.outerlayer = 1
-		self.W_one = 2 * np.random.rand(self.innerlayer, self.hiddenlayer) - 1
-		self.W_two = 2 * np.random.rand(self.hiddenlayer, self.outerlayer) - 1
-
-	def  backProp(self):
-
+	#initialize hyper-parameters (ite is the number of iterations of gradiant descent)
+	def __init__(self, x, y, lr, ite):
+        self.x = x
+        self.y = y
+        self.lr = lr
+        self.ite = ite
+        self.innerlayer = 3 #input layer
+        self.hiddenlayer = 7
+        self.outerlayer = 1
+        self.W_one = 2 * np.random.rand(self.hiddenlayer, self.innerlayer) - 1
+        self.W_two = 2 * np.random.rand(self.outerlayer, self.hiddenlayer) - 1
+    
+    def backProp(self):
+        
+        for i in range(self.ite):
+            #basic forward propogation stff
+            self.z_1 = np.dot( self.W_one,self.x)
+            self.a_1 = sigma(self.z_1)
+            self.z_2 = np.dot(self.W_two, self.a_1)
+            self.a_2 = self.sigma(self.z_2)
+	
+            #calculation of error and deltas for each layer
+            self.error = (self.a_2 - self.y)
+            self.delta_2 = self.error * self.sigma_der(self.z_2)
+            self.error_2 = np.dot(self.W_two.T, self.delta_2)
+            self.delta_1 = np.multiply(self.error_2, self.sigma_der(self.z_1))
 		
+            #slope of cost with respective weights
+            self.DJDW_2 = np.dot(self.delta_2, self.a_1.T)
+            self.DJDW_1 = np.dot(self.delta_1, self.x.T)
+	
+            #updating weights with new values
+            self.W_one -= self.lr * self.DJDW_1
+            self.W_two -= self.lr * self.DJDW_2
+        
+        return 100 * self.a_2
 
-		self.z_two = np.dot( self.x, self.W_one)
-		self.a_two = sigmoid(self.z_two)
-		self.z_three = np.dot(self.a_two, self.W_two)
-		self.a_three = sigmoid(self.z_three)
-
-'''
-		self.delta_three = np.multiply((self.a_three - self.y), sigmoid_prime(self.z_three)) 
-
-		self.pot = np.multiply(self.delta_three, sigmoid_prime(self.z_two))
-		self.delta_two =  np.dot(self.W_two.T, self.pot)
-
-		self.dEdW_one = np.dot(self.delta_two, self.x.T)
-		self.dEdW_two = np.dot(self.delta_three, self.a_two.T)
-
-		self.W_one = self.W_one - (self.lr * self.dEdW_one)
-		self.W_two = self.W_two - (self.lr * self.dEdW_two)
-'''
-
-		return self.a_three
+    def sigma(self,a):
+        return 1 / (1 + np.exp(-a)) 
+    
+    def sigma_der(self,a):
+        return np.exp(-a)/((1+np.exp(-a))**2)
 
 NN = Neural_Net(x_minmax_scaled, y_minmax_scaled, 0.1)
 
