@@ -69,10 +69,10 @@ class Neural_Net(object):
     def sigma_der(self,a):
         return np.exp(-a)/((1+np.exp(-a))**2)
 
-NN = Neural_Net(x_minmax_scaled, y_minmax_scaled, 0.1)
+NN = Neural_Net(x_minmax_scaled.T, y_minmax_scaled.T, 0.05, 10000)
 
 y_hat = NN.backProp()
 
-print(100 * y_hat)
+print(y_hat.T)
 
 
