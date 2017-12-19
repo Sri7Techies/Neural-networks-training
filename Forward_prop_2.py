@@ -65,10 +65,10 @@ class Neural_Net(object):
 
 	def  forwardProp(self):
 		#	Z = W.X
-		self.z_two = np.dot( self.W_one, self.x) #(10,1) matrix
+		self.z_two = np.dot( self.W_one, self.x) #(10,6) matrix
 		#	A = σ(Z)
 		self.a_two = sigmoid(self.z_two)
-		self.z_three = np.dot(self.W_two, self.a_two)
+		self.z_three = np.dot(self.W_two, self.a_two)#(1,6) matrix
 		self.a_three = sigmoid(self.z_three)
 
 		return 100 * self.a_three
