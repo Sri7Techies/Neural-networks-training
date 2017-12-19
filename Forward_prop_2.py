@@ -3,15 +3,23 @@ from numpy import exp, array, random, dot
 import pandas as pd 
 from sklearn import preprocessing
 
-"""
-	Project demonstrating simple backpropogation
-	in Neural networks.
+'''
+	Project demonstrating simple forward propagation
+	in Neural networks for a little complex data.
 	Data used is the marks of three exams
 	which are used to predict final score
-
-"""
+	Later we shall use the same data for backpropagation algo
+'''
 
 min_max_scaler = preprocessing.MinMaxScaler()
+
+'''
+	Min_max_scaler is available in sklear. It scales data in the range of [0,1]
+	example: A is a list of values (array)
+	for a given index  i
+	min_max_scaler(A[i]) = (A[i] - min(A[i]))/(max(A[i]) - min(A[i]))
+	This works well because our data is non-negative
+'''
 
 tests_score = np.array([[78,85,91],[65,78,51],[69,80,75],[96,94,91],[86,90,78],[68,76,65]])
 
@@ -52,24 +60,23 @@ class Neural_Net(object):
 		self.innerlayer = 3 #input layer
 		self.hiddenlayer = 10
 		self.outerlayer = 1
-		self.W_one = 2 * np.random.rand(self.innerlayer, self.hiddenlayer) - 1
-		self.W_two = 2 * np.random.rand(self.hiddenlayer, self.outerlayer) - 1
+		self.W_one = 2 * np.random.rand(self.hiddenlayer, self.innerlayer) - 1
+		self.W_two = 2 * np.random.rand(self.outerlayer, self.hiddenlayer) - 1
 
 	def  forwardProp(self):
-
-		
-
-		self.z_two = np.dot( self.x, self.W_one)
+		#	Z = W.X
+		self.z_two = np.dot( self.W_one, self.x) #(10,1) matrix
+		#	A = σ(Z)
 		self.a_two = sigmoid(self.z_two)
-		self.z_three = np.dot(self.a_two, self.W_two)
+		self.z_three = np.dot(self.W_two, self.a_two)
 		self.a_three = sigmoid(self.z_three)
 
-		return self.a_three
+		return 100 * self.a_three
 
-NN = Neural_Net(x_minmax_scaled, y_minmax_scaled, 0.1)
+NN = Neural_Net(x_minmax_scaled.T, y_minmax_scaled.T, 0.01)
 
 y_hat = NN.forwardProp()
 
-print(100 * y_hat)
+print(y_hat.T)
 
 
