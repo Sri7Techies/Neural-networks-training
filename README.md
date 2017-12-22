@@ -3,8 +3,9 @@
 A repo of all codes I wrote during my NN self training
 
 <b>Beginners can start refering in this order</b>
-&#x2714; --> code available
-&#x2718; --> Not done
+<br>
+&#x2714; --> code available<br>
+&#x2718; --> Not done<br>
 <ul>
   <li>&#x2714;Neural Netowrk with single cell</li>
   <li>&#x2714;Basic feed forward in neural netowrk with one hidden layer</li>
