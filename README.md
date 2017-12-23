@@ -11,7 +11,7 @@ A repo of all codes I wrote during my NN self training
   <li>&#x2714;Basic feed forward in neural network with one hidden layer</li>
   <li>&#x2718;Feed forward in a deep neural network(lot of hidden layers)</li>
   <li>&#x2714;Basic back propagation in NN with single hidden layer</li>
-  <li>&#x2718;Back propagation in deep NN</li>
+  <li>&#x2714;Back propagation in deep NN</li>
   <li>&#x2718;Simple Convolutional neural net model(CNN)</li>
   <li>&#x2718;Complex CNN</li>
 </ul>
