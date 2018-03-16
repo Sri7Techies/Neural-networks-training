@@ -4,4 +4,4 @@
 
 -[Siraj Raval's](https://www.youtube.com/channel/UCWN3xxRkmTPmbKwht9FuE5A) youtube channel
 
--[Coursera courses](www.deeplearning.ai) on deep learning
+-[Coursera courses](https://www.deeplearning.ai/) on deep learning
